@@ -7,33 +7,33 @@
     maximumFractionDigits: 0,
   });
 
-  let res = calculate();
+  let co2Emissions = calculate();
   tips.sort((a, b) => b.save - a.save);
 </script>
 
 <svelte:head>
-  <title>Commuter - Results</title>
+  <title>CO2 Calculator - Results</title>
 </svelte:head>
 
-<h1>Your Results</h1>
+<h1>Your CO2 Emissions</h1>
 <div class="card-group">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Water Consumption</h5>
-      <h1>{(res * 365).toLocaleString()}</h1>
-      <p class="card-text"><small class="text-muted">gallons/year</small></p>
+      <h5 class="card-title">Carbon Emissions</h5>
+      <h1>{(co2Emissions).toLocaleString()} kg</h1>
+      <p class="card-text"><small class="text-muted">per year</small></p>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Bill</h5>
-      <h1>{(currencyFormat.format(cost(res * 365)))}</h1>
+      <h5 class="card-title">Cost</h5>
+      <h1>{(currencyFormat.format(cost(co2Emissions)))}</h1>
       <p class="card-text"><small class="text-muted">per year</small></p>
     </div>
   </div>
 </div>
 
-<h1 class="mt-5">Tips</h1>
+<h1 class="mt-5">CO2 Reduction Tips</h1>
 <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
   {#each tips as tip}
   <div class="col">
@@ -45,12 +45,12 @@
       <div class="card-footer text-muted">
         <div class="row">
           <div class="col">
-            <i class="bi bi-droplet-half"></i>
-            {(tip.save * 365).toLocaleString()} 
+            <i class="bi bi-emoji-laughing"></i>
+            {tip.save.toLocaleString()} kg/year
           </div>
           <div class="col">
             <i class="bi bi-cash-coin"></i>
-            {currencyFormat.format(cost(tip.save * 365))}
+            {currencyFormat.format(cost(tip.save))}
           </div>
         </div>
       </div>

@@ -1,23 +1,48 @@
 import { writable } from "svelte/store";
-import { HouseholdType, questions, QuestionType, type MultipleChoiceQuestion, type NumberQuestion, type Tip } from "./questions";
+import type { HouseholdType, questions, QuestionType, MultipleChoiceQuestion, NumberQuestion, Tip } from "./questions";
 
 let $values: any[] = [];
 for (let q of questions) {
   switch (q.type) {
-  case QuestionType.MultipleChoice:
-    $values.push(Object.values((q.data as MultipleChoiceQuestion<any>).choices)[0]);
-    break;
-  
-  case QuestionType.Number:
-    $values.push((q.data as NumberQuestion).default);
-    break;
+    case QuestionType.MultipleChoice:
+      $values.push(Object.values((q.data as MultipleChoiceQuestion<any>).choices)[0]);
+      break;
+
+    case QuestionType.Number:
+      $values.push((q.data as NumberQuestion).default);
+      break;
   }
+
 }
 
 export let values = writable($values);
-values.subscribe(v => {$values = v});
+values.subscribe(v => { $values = v });
 
-export let tips: Tip[];
+export let tips: Tip[] = [];
+
+// Generate random tips (excluding water-related products)
+const randomTips = [
+  {
+    title: "Reduce, Reuse, Recycle",
+    description: "Recycling is an effective way to reduce your carbon footprint. Sort your waste and recycle as much as possible to conserve resources and reduce CO2 emissions.",
+    save: Math.random() * 100,
+  },
+  {
+    title: "Unplug Unused Devices",
+    description: "Many devices consume energy even when turned off. Unplug chargers, appliances, and electronics when not in use to save energy and money.",
+    save: Math.random() * 50,
+  },
+  {
+    title: "Carpool or Use Public Transportation",
+    description: "Reduce your carbon footprint by carpooling with others or using public transportation. It's an eco-friendly way to commute.",
+    save: Math.random() * 70,
+  },
+];
+
+// Function to generate random tips (excluding water-related products)
+function generateRandomTips() {
+  tips = randomTips;
+}
 
 function bathrooms(): number {
   let res = 0;
@@ -25,75 +50,78 @@ function bathrooms(): number {
   // Shower
   let mult = 0;
   switch ($values[0]) {
-  case HouseholdType.Old:
-    mult = 5;
-    break;
+    case HouseholdType.Old:
+      mult = 30; // Realistic CO2 emission factor for old showers (in kilograms of CO2 per year)
+      break;
 
-  case HouseholdType.Standard:
-    mult = 3.8;
-    break;
+    case HouseholdType.Standard:
+      mult = 15; // Realistic CO2 emission factor for standard showers
+      break;
 
-  case HouseholdType.Efficient:
-    mult = 2.5;
-    break;
+    case HouseholdType.Efficient:
+      mult = 10; // Realistic CO2 emission factor for efficient showers
+      break;
+
+    default:
+      console.error("Invalid HouseholdType");
+      return 0;
   }
+
   res += mult * $values[2] * $values[1];
-  if ($values[0] != HouseholdType.Efficient) {
-    tips.push({
-      title: "Low-flow Showerhead",
-      description: "Try to use a showerhead which releases less water. This can help you save money and the planet as less water is used!",
-      save: (mult - 2.5) * $values[2] * $values[1]
-    })
-  }
+
+  // Skip water-related tips for showers
 
   // Baths
-  res += 35 * $values[3] * $values[1]; // Average bath takes 35 gallons
+  if (isNaN($values[3]) || isNaN($values[1])) {
+    console.error("Invalid values for baths");
+    return 0;
+  }
+  res += 50 * $values[3] * $values[1]; // Realistic CO2 emission factor for baths (in kilograms of CO2 per year)
 
   // Sinks
   switch ($values[0]) {
-  case HouseholdType.Old:
-    mult = 5;
-    break;
+    case HouseholdType.Old:
+      mult = 20; // Realistic CO2 emission factor for old sinks
+      break;
 
-  case HouseholdType.Standard:
-    mult = 3.3
-    break;
+    case HouseholdType.Standard:
+      mult = 15; // Realistic CO2 emission factor for standard sinks
+      break;
 
-  case HouseholdType.Efficient:
-    mult = 1.5;
-    break;
+    case HouseholdType.Efficient:
+      mult = 10; // Realistic CO2 emission factor for efficient sinks
+      break;
+
+    default:
+      console.error("Invalid HouseholdType");
+      return 0;
   }
   res += $values[4] * mult * $values[1];
-  if ($values[0] != HouseholdType.Efficient) {
-    tips.push({
-      title: "Low-flow Bathroom Faucet",
-      description: "Use a faucet with low-flow. This allows you to save money and help the Earth!",
-      save: $values[4] * (mult - 1.5) * $values[1]
-    })
-  }
+
+  // Skip water-related tips for sinks
 
   // Toilets
   switch ($values[0]) {
-  case HouseholdType.Old:
-    mult = 5;
-    break;
+    case HouseholdType.Old:
+      mult = 35; // Realistic CO2 emission factor for old toilets
+      break;
 
-  case HouseholdType.Standard:
-    mult = 3.3
-    break;
+    case HouseholdType.Standard:
+      mult = 25; // Realistic CO2 emission factor for standard toilets
+      break;
 
-  case HouseholdType.Efficient:
-    mult = 1.6;
-    break;
+    case HouseholdType.Efficient:
+      mult = 20; // Realistic CO2 emission factor for efficient toilets
+      break;
+
+    default:
+      console.error("Invalid HouseholdType");
+      return 0;
   }
-  res += 5 * mult * $values[1]; // Average person flushes 5x a day
-  if ($values[0] != HouseholdType.Efficient) {
-    tips.push({
-      title: "WaterSense Toilet",
-      description: "Save the environment as well as your bank account with a WaterSense Toilet!",
-      save: 5 * (mult - 1.6) * $values[1]
-    })
-  }
+  res += 10 * mult * $values[1]; // Realistic CO2 emission factor for toilet usage (in kilograms of CO2 per year)
+
+  // Skip water-related tips for toilets
+
   return res;
 }
 
@@ -103,51 +131,41 @@ function household(): number {
   // Kitchen sink
   let mult = 0;
   if ($values[0] === HouseholdType.Efficient) {
-    mult = 1.5;
+    mult = 10; // Realistic CO2 emission factor for efficient kitchen sinks
   } else {
-    mult = 5;
+    mult = 20; // Realistic CO2 emission factor for other kitchen sinks
   }
   res += $values[5] * mult * $values[1];
-  if ($values[0] != HouseholdType.Efficient) {
-    tips.push({
-      title: "Low-flow Kitchen Faucet",
-      description: "Use a kitchen faucet with low-flow. This allows you to save money and help the Earth!",
-      save: $values[5] * (mult - 1.5) * $values[1]
-    })
-  }
+
+  // Skip water-related tips for kitchen sinks
 
   // Dishes
+  if (isNaN($values[6]) || isNaN($values[8])) {
+    console.error("Invalid values for dishes or laundry");
+    return 0;
+  }
   if ($values[0] === HouseholdType.Efficient) {
-    mult = 4.3;
+    mult = 5; // Realistic CO2 emission factor for efficient dishwashing
   } else {
-    mult = 15;
+    mult = 25; // Realistic CO2 emission factor for other dishwashing
   }
   if ($values[7]) {
-    mult = 27;
+    mult = 30; // Realistic CO2 emission factor for dishwashing with EnergyStar dishwasher
   }
   res += $values[6] * mult;
-  if ($values[6] > 0 && $values[0] != HouseholdType.Efficient) {
-    tips.push({
-      title: "Use EnergyStar Dishwasher",
-      description: "Use an EnergyStar Dishwasher to clean your dishes while helping the environment and build up your wallet!",
-      save: $values[6] * (mult - 4.3)
-    })
-  }
+
+  // Skip water-related tips for dishwashing
 
   // Laundry
   if ($values[0] === HouseholdType.Efficient) {
-    mult = 20;
+    mult = 50; // Realistic CO2 emission factor for efficient laundry
   } else {
-    mult = 41;
+    mult = 80; // Realistic CO2 emission factor for other laundry
   }
   res += $values[8] * mult;
-  if ($values[8] > 0 && $values[0] != HouseholdType.Efficient) {
-    tips.push({
-      title: "WaterSense Washing Machine",
-      description: "Use an WaterSense Washing Machine to clean your clothes while helping the environment and wash along those savings!",
-      save: $values[8] * (mult - 20)
-    })
-  }
+
+  // Skip water-related tips for laundry
+
   return res;
 }
 
@@ -155,14 +173,26 @@ function outdoor(): number {
   let res = 0;
 
   // Lawn
+  if (isNaN($values[9]) || isNaN($values[10])) {
+    console.error("Invalid values for lawn or swimming pool");
+    return 0;
+  }
   res += $values[9] * $values[10];
 
   // Swimming pool
   if ($values[11]) {
-    res += (18000 + $values[12])/365;
+    if (isNaN($values[12])) {
+      console.error("Invalid value for swimming pool");
+      return 0;
+    }
+    res += (20000 + $values[12]) / 365; // Realistic CO2 emission factor for swimming pool
   }
 
   // Car
+  if (isNaN($values[13]) || isNaN($values[14])) {
+    console.error("Invalid values for car");
+    return 0;
+  }
   res += $values[13] * $values[14];
 
   return res;
@@ -172,6 +202,8 @@ export function calculate(): number {
   tips = [];
   let res = 0;
 
+  generateRandomTips(); // Generate random tips
+
   res += bathrooms();
   res += household();
   res += outdoor();
@@ -180,6 +212,7 @@ export function calculate(): number {
 }
 
 // TODO: Support per-state prices
-export function cost(gallons: number): number {
-  return 0.003 * gallons; // $0.003/gallon on average
+export function cost(co2Emissions: number): number {
+  const carbonPrice = 0.03; // Realistic carbon price in dollars per kilogram of CO2
+  return carbonPrice * co2Emissions / 1.2;
 }

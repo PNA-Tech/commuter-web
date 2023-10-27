@@ -3,26 +3,34 @@
 
   let estimate = 0;
   let display = 0;
-  values.subscribe(() => {
-    estimate = calculate() * 365;
-  })
-  const currencyFormat = new Intl.NumberFormat('en-US', {
+  let currencyFormat = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     maximumFractionDigits: 0,
   });
-  setInterval(() => {
+
+  // Subscribe to changes in values
+  values.subscribe(() => {
+    // Calculate the annual CO2 emissions based on the daily estimate
+    estimate = calculate() * 365;
+  });
+
+  // Function to update the display estimate
+  function updateDisplay() {
     if (display != estimate) {
       display += Math.round((estimate - display) / 10);
       if (Math.abs(display - estimate) < 10) {
         display = estimate;
       }
     }
-  }, 10)
+  }
+
+  // Set an interval to update the display
+  let displayInterval = setInterval(updateDisplay, 10);
 </script>
 
 <div class="estimate">
-  <div>{display.toLocaleString()} gal/year</div>
+  <div>{display.toLocaleString()} kg CO2/year</div>
   <div>{currencyFormat.format(cost(display))}/year</div>
 </div>
 

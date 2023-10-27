@@ -2,20 +2,16 @@
   <title>About Us</title>
 </svelte:head>
 
-<div class="about-section">
-  <h1>About Us</h1>
+<div class="co2-calculator-section">
+  <h1>CO2 Calculator</h1>
   <p>
-    Commuter is a water calculator that asks questions to determine a person's
-    water use in gallons per year and also estimates your bill based on your
-    residence. Based on your responses to the questions, our website sends you
-    personalized tips and suggests the following steps to help you create a more
-    sustainable environment. Our customized recommendations provide estimations
-    so that the user can learn more and be more motivated by listing the
-    benefits of following our customized tips. Once they finish the questions,
-    credible resources are provided to assist the user in gaining more knowledge
-    and becoming more aware of their surroundings, as well as to assist the user
-    in learning about their water footprint and the small steps they can take to
-    learn more.
+    Welcome to the CO2 Calculator, your tool for estimating and reducing your carbon footprint. Our calculator assesses your lifestyle and provides insights into your annual CO2 emissions. Based on your responses to the questions, we offer personalized tips and steps to help you transition to a more sustainable and eco-friendly lifestyle.
+  </p>
+  <p>
+    Our mission is to raise awareness about the impact of daily choices on the environment and inspire individuals to take action. By understanding your carbon footprint, you can make informed decisions to reduce CO2 emissions.
+  </p>
+  <p>
+    After completing the questions, we provide credible resources to further educate you about environmental sustainability, carbon reduction, and the positive effects of your efforts. Join us in the journey towards a greener, more sustainable world.
   </p>
 </div>
 

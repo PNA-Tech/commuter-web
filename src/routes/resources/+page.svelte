@@ -1,107 +1,94 @@
 <svelte:head>
-    <title>Commuter - Resources</title>
+    <title>CO2 Tips - Resources</title>
 </svelte:head>
 
-<h1>Resources</h1>
-<p class="lead">Learn more about how water footprint, how where you live affects you, and what you can do the help the Earth.</p>
+<h1>CO2 Tips and Resources</h1>
+<p class="lead">Learn more about reducing your carbon footprint and find valuable resources to help you make eco-friendly choices.</p>
 
 <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center mb-5">
     <div class="col">
         <div class="card">
-        <img src="/resources/water-bill.jpg" class="card-img-top" alt="Water Bill Cover"/>
+        <img src="/resources/carbon-footprint.jpg" class="card-img-top" alt="Carbon Footprint"/>
         <div class="card-body">
-            <h5 class="card-title">Water Bill</h5>
-            <p class="card-text">Understanding how much water you use now is the first step in changing the way you use water in the future. This information is best found on your monthly water bill. Take your water bill and follow the instructions below to learn more about it and your individual water consumption.</p>
-            <a href="https://www.epa.gov/watersense/understanding-your-water-bill" target="_blank" class="btn btn-primary">Learn more</a>
+            <h5 class="card-title">Understanding Your Carbon Footprint</h5>
+            <p class="card-text">Discover the basics of calculating and understanding your carbon footprint. Knowing your carbon footprint is the first step in reducing it. Learn how to measure and assess your impact on the environment.</p>
+            <a href="https://www.carbonfootprint.com/carbonfootprint.html" target="_blank" class="btn btn-primary">Learn more</a>
         </div>
         </div>
     </div>
 
     <div class="col">
-        <div class="card">
-        <img src="/resources/how-we-use-water.jpg" class="card-img-top" alt="Water Bill Cover"/>
+        <div a class="card">
+        <img src="/resources/carbon-reduction.jpg" class="card-img-top" alt="Carbon Reduction"/>
         <div class="card-body">
-            <h5 class="card-title">How We Use Water</h5>
-            <p class="card-text">Although the Earth appears to have an abundance of water, only around 1% of it is available for human use. The remainder is either saline water from seas, fresh water trapped in polar ice caps, or too inaccessible for practical use. Despite rising population and demand for freshwater resources, availability will always be steady. And, while the water cycle regularly returns water to Earth, it is not always restored in the same area, amount, or quality.</p>
-            <a href="https://www.epa.gov/watersense/how-we-use-water" target="_blank" class="btn btn-primary">Learn more</a>
+            <h5 class="card-title">Reducing Your Carbon Footprint</h5>
+            <p class="card-text">Explore practical steps and lifestyle changes to reduce your carbon footprint. From energy-saving tips to sustainable transportation options, you can make a significant impact on the environment.</p>
+            <a href="https://www.nrdc.org/stories/how-you-can-stop-global-warming" target="_blank" class="btn btn-primary">Learn more</a>
         </div>
         </div>
     </div>
 
     <div class="col">
         <div class="card">
-            <img src="https://eamenergy.com/wp-content/uploads/2013/07/header_water-1024x403.jpg" class="card-img-top" alt="Water Bill Cover"/>
+            <img src="/resources/eco-friendly-products.jpg" class="card-img-top" alt="Eco-Friendly Products"/>
             <div class="card-body">
-            <h5 class="card-title">WaterSense Products</h5>
-            <p class="card-text">WaterSense makes it simple to locate and choose water-saving products that benefit both your budget and the environment. Simply check for WaterSense-labeled goods at your local shop. Reduce your water use while enjoying great performance with the WaterSense branded goods listed below. To begin, click on the link below and select the types of products you want.</p>
-            <a href="https://lookforwatersense.epa.gov/products/" target="_blank" class="btn btn-primary">Learn more</a>
+            <h5 class="card-title">Eco-Friendly Products</h5>
+            <p class="card-text">Discover a range of eco-friendly products that can help you reduce your carbon footprint. From energy-efficient appliances to sustainable consumer goods, find products that align with your environmental goals.</p>
+            <a href="https://www.greenamerica.org/green-living/green-products" target="_blank" class="btn btn-primary">Learn more</a>
             </div>
         </div>
     </div>
 
     <div class="col">
         <div class="card">
-            <img src="https://bellevuewa.gov/sites/default/files/styles/max_650x650/public/inline-images/2020-11/2021-2022%20typical%20bill%20graphic%20horizontal.PNG?itok=JgZqfxj9" class="card-img-top" alt="Water Bill Cover"/>
+            <img src="/resources/climate-action.jpg" class="card-img-top" alt="Climate Action"/>
             <div class="card-body">
-            <h5 class="card-title">Water Bills by State</h5>
-            <p class="card-text">How what state you live in affects your water bill. Each drink of water, shower, or flush now costs significantly more than it did only eight years ago, and your water bill is expected to rise again in 2023. The average monthly water bill in the United States is $70.93 and the average American uses around 100 gallons of water each day.</p>
-            <a href="https://dripfina.com/water-bill-by-us-states/#:~:text=What%27s%20The%20Average%20Monthly%20Water%20Bill%20in%20the,7%20Colorado%20...%208%20Connecticut%20...%20More%20items" target="_blank" class="btn btn-primary">Learn more</a>
+            <h5 class="card-title">Taking Climate Action</h5>
+            <p class="card-text">Explore initiatives, organizations, and actions you can take to contribute to global climate solutions. Get involved in climate advocacy, support environmental organizations, and join the movement for a sustainable future.</p>
+            <a href="https://www.worldwildlife.org/get-involved" target="_blank" class="btn btn-primary">Learn more</a>
             </div>
         </div>
     </div>
 
     <div class="col">
         <div class="card">
-            <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/thumbnails/image/DO-trend.png?itok=xIMjHmdv" class="card-img-top" alt="Water Bill Cover"/>
+            <img src="/resources/climate-education.jpg" class="card-img-top" alt="Climate Education"/>
             <div class="card-body">
-            <h5 class="card-title">Domestic Water Usage Survey</h5>
-            <p class="card-text">Learn how water use changed over 65 years. Domestic water consumption encompasses both indoor and outdoor uses at homes, including drinking, food preparation, bathing, washing clothing and dishes, flushing toilets, watering lawns and gardens, and pool maintenance.</p>
-            <a href="https://www.usgs.gov/mission-areas/water-resources/science/domestic-water-use" target="_blank" class="btn btn-primary">Learn more</a>
+            <h5 class="card-title">Climate Education</h5>
+            <p class="card-text">Educate yourself about climate change, its effects, and the science behind it. Knowledge is a powerful tool in the fight against climate change. Explore resources for climate education and awareness.</p>
+            <a href="https://climate.nasa.gov/resources/" target="_blank" class="btn btn-primary">Learn more</a>
             </div>
         </div>
     </div>
 
     <div class="col">
         <div class="card">
-            <img src="https://www.conservenorthtexas.org/getmedia/0e6eb510-27fa-441c-8358-0e1547b85a87/EPA_USgpcd.png" class="card-img-top" alt="Water Bill Cover"/>
+            <img src="/resources/climate-action.jpg" class="card-img-top" alt="Climate Action"/>
             <div class="card-body">
-            <h5 class="card-title">Domestic Water Usage Growth</h5>
-            <p class="card-text">Learn about the project change in Water Use for 2030. Many of the states with predicted population expansion have greater per capita water demand and will face increased competition for water resources. Communities around the country are beginning to face water supply difficulties, as well as the need to repair old water treatment and distribution systems, referred to as "water infrastructure."</p>
-            <a href="https://www.conservenorthtexas.org/regional-indicators/us-domestic-water-use-gallons-day-person" target="_blank" class="btn btn-primary">Learn more</a>
+            <h5 class="card-title">Supporting Renewable Energy</h5>
+            <p class="card-text">Learn about renewable energy sources and how you can support clean energy initiatives. Transitioning to renewable energy is a key step in reducing carbon emissions and combating climate change.</p>
+            <a href="https://www.energy.gov/eere/solar/solar-energy-technologies-office" target="_blank" class="btn btn-primary">Learn more</a>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-    /* width */
-    /* set the width of the scrollbar */ 
+    /* Customize scrollbar styles */
     ::-webkit-scrollbar {
-      width: 10px;
+        width: 10px;
     }
-    
 
-    /* Handle */
-    /* set the color of the scrollbar and the radius of its corners */
     ::-webkit-scrollbar-thumb {
-      background: rgb(150, 150, 150);
-      border-bottom-left-radius: 5px;
-      border-top-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      border-top-right-radius: 5px;
+        background: rgb(150, 150, 150);
+        border-radius: 5px;
     }
-    
-    
-    /* Handle on hover */
-    /* set the color of the scrollbar when hovered over */
+
     ::-webkit-scrollbar-thumb:hover {
-      background: rgb(131, 131, 131);
+        background: rgb(131, 131, 131);
     }
-    
-    
-    /* Handle on active */
-    /* set the color of the scrollbar when clicked */
+
     ::-webkit-scrollbar-thumb:active {
-      background: rgb(104, 104, 104);
+        background: rgb(104, 104, 104);
     }
 </style>

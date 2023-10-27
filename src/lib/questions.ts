@@ -40,18 +40,18 @@ export enum HouseholdType {
 
 export const questions: Question<any>[] = [
   {
-    title: "What type of household do you have?",
+    title: "What type of household do you have for CO2 conservation?",
     type: QuestionType.MultipleChoice,
     data: {
       choices: {
-        "Pre-1980": HouseholdType.Old,
-        "Standard": HouseholdType.Standard,
-        "Efficient (WaterSense appliances, low-flow showerheads, etc.)": HouseholdType.Efficient,
+        "Low Emission Vehicles": HouseholdType.Efficient,
+        "Regular Vehicles": HouseholdType.Standard,
+        "High Emission Vehicles": HouseholdType.Old,
       }
     },
   },
   {
-    title: "How many people live in your household?",
+    title: "How many people use vehicles in your household for CO2 conservation?",
     type: QuestionType.Number,
     data: {
       min: 1,
@@ -59,24 +59,47 @@ export const questions: Question<any>[] = [
     },
   },
   {
-    title: "How long is the average shower in your household?",
+    title: "How many miles does the average vehicle in your household drive daily for CO2 conservation?",
     type: QuestionType.MultipleChoice,
     data: {
       choices: {
-        "<5 minutes": 4,
-        "5-10 minutes": 8,
-        "11-15 minutes": 13,
-        "15+ minutes": 16,
+        "Less than 10 miles": 4,
+        "10-50 miles": 8,
+        "50-100 miles": 13,
+        "More than 100 miles": 16,
       }
     },
   },
   {
-    title: "How often do people in your household take baths?",
+    title: "How often do the vehicles in your household emit CO2 for CO2 conservation?",
     type: QuestionType.MultipleChoice,
     data: {
       choices: {
-        "Never": 0,
-        "Once a year": 1/365,
+        "Rarely": 1/400,
+        "Occasionally": 1/365,
+        "Weekly": 1/7,
+        "Daily": 1,
+      }
+    }
+  },
+  {
+    title: "How long do vehicles in your household idle for CO2 conservation?",
+    type: QuestionType.MultipleChoice,
+    data: {
+      choices: {
+        "Less than 5 minutes": 4,
+        "5-20 minutes": 8,
+        "21-45 minutes": 20,
+        "More than 45 minutes": 30,
+      }
+    },
+  },
+  {
+    title: "How often do you perform emissions tests on your vehicles for CO2 conservation?",
+    type: QuestionType.MultipleChoice,
+    data: {
+      choices: {
+        "Never": 1/400,
         "Once a month": 1/30,
         "Once a week": 1/7,
         "Once a day": 1,
@@ -84,48 +107,12 @@ export const questions: Question<any>[] = [
     }
   },
   {
-    title: "How long do people in your household leave the bathroom sink running?",
+    title: "Do you have a hybrid or electric vehicle for CO2 conservation?",
     type: QuestionType.MultipleChoice,
     data: {
       choices: {
-        "<4 minutes": 4,
-        "4-10 minutes": 8,
-        "11-30 minutes": 20,
-        "30+ minutes": 30,
-      }
-    },
-  },
-  {
-    title: "How long do members of your household leave the kitchen sink running (not including washing dishes)?",
-    type: QuestionType.MultipleChoice,
-    data: {
-      choices: {
-        "Under 5 minutes": 4,
-        "5-20 minutes": 13,
-        "21-45 minutes": 33,
-        "Over 45 minutes": 45,
-      }
-    }
-  },
-  {
-    title: "How often does your household wash dishes?",
-    type: QuestionType.MultipleChoice,
-    data: {
-      choices: {
-        "Disposable dishes": 0,
-        "Once a week": 1/7,
-        "Once a day": 1,
-        "Twice a day": 2,
-      }
-    }
-  },
-  {
-    title: "How are dishes washed?",
-    type: QuestionType.MultipleChoice,
-    data: {
-      choices: {
-        "By hand": true,
-        "Dishwasher": false,
+        "No": false,
+        "Yes": true,
       },
     },
     condition: {
@@ -134,11 +121,11 @@ export const questions: Question<any>[] = [
     },
   },
   {
-    title: "How often does your household do laundry?",
+    title: "How often do you perform vehicle maintenance for CO2 conservation?",
     type: QuestionType.MultipleChoice,
     data: {
       choices: {
-        "Never": 0,
+        "Never": 1/400,
         "Once a month": 1/30,
         "Once a week": 1/7,
         "Once a day": 1,
@@ -146,38 +133,36 @@ export const questions: Question<any>[] = [
     }
   },
   {
-    title: "How often do you water your lawn?",
+    title: "Do you use public transportation for CO2 conservation?",
     type: QuestionType.MultipleChoice,
     data: {
       choices: {
-        "Never": 0,
-        "Once a month": 1/30,
-        "Once a week": 1/7,
-        "Once a day": 1,
-      },
-    },
-  },
-  {
-    title: "How large is the area of your lawn?",
-    type: QuestionType.MultipleChoice,
-    data: {
-      choices: {
-        "1-99 square feet": 17,
-        "100-500 square feet": 99,
-        "500-1,000 square feet": 248,
-        "1,000-5,000 square feet": 990,
-        "5,000-10,000 square feet": 2470,
-        "10,000-40,000 square feet": 8250,
-        "40,000+ square feet": 14375,
+        "Rarely": 1/400,
+        "Occasionally": 1/365,
+        "Weekly": 1/7,
+        "Daily": 1,
       },
     },
     condition: {
       offset: -1,
-      check: (v: number) => v != 0,
+      check: (v: boolean) => v,
     },
   },
   {
-    title: "Do you have a swimming pool?",
+    title: "How often do you recycle paper products?",
+    type: QuestionType.MultipleChoice,
+    data: {
+      choices: {
+        "Never": 1/400,
+        "Rarely": 1/365,
+        "Occasionally": 1/30,
+        "Regularly": 1/7,
+        "Daily": 1,
+      }
+    }
+  },
+  {
+    title: "Do you compost organic waste?",
     type: QuestionType.MultipleChoice,
     data: {
       choices: {
@@ -187,54 +172,38 @@ export const questions: Question<any>[] = [
     },
   },
   {
-    title: "How many months do you leave the pool uncovered?",
+    title: "How often do you turn off lights when not in use?",
     type: QuestionType.MultipleChoice,
     data: {
       choices: {
-        "1": 1000,
-        "2": 2000,
-        "3": 3000,
-        "4": 4000,
-        "5": 5000,
-        "6": 6000,
-        "7": 7000,
-        "8": 8000,
-        "9": 9000,
-        "10": 10000,
-        "11": 11000,
-        "12": 12000,
-      },
-    },
-    condition: {
-      offset: -1,
-      check: (v: boolean) => v,
-    },
+        "Rarely": 1/400,
+        "Occasionally": 1/365,
+        "Weekly": 1/7,
+        "Always": 1,
+      }
+    }
   },
   {
-    title: "How often do you wash your car?",
+    title: "Do you have energy-efficient appliances in your home?",
     type: QuestionType.MultipleChoice,
     data: {
       choices: {
-        "I don't have a car": 0,
-        "Once a year": 1/365,
-        "Once a month": 1/30,
-        "Once a week": 1/7,
-        "Once a day": 1,
+        "No": false,
+        "Yes": true,
       },
     },
   },
   {
-    title: "How do you wash your car?",
+    title: "How often do you use public transportation for commuting?",
     type: QuestionType.MultipleChoice,
     data: {
       choices: {
-        "At home": 100,
-        "Car wash": 58,
-      },
-    },
-    condition: {
-      offset: -1,
-      check: (v: number) => v != 0,
-    },
-  }
+        "Never": 1/400,
+        "Rarely": 1/365,
+        "Occasionally": 1/30,
+        "Weekly": 1/7,
+        "Daily": 1,
+      }
+    }
+  },
 ];
