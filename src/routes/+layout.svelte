@@ -2,11 +2,11 @@
   import { page } from "$app/stores";
 </script>
 
-<nav class="navbar navbar-expand-lg py-0" style="background-color: #0e1525;">
+<nav class="navbar navbar-expand-lg py-0" style="background-color: #9cd45c;">
   <div class="container-fluid">
     <a class="navbar-brand" href="/" style="color: #f5f9fc;">
       <img src="/favicon.png" width="28" height="28" alt="Logo" class="d-inline-block align-text-top">
-      Waterly
+      Commuter
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@
       </ul>
       <div class="collapse navbar-collapse justify-content-end">
         <h1 class="m-4">
-          <a href="https://github.com/Interlake-Congressional-App-Challenge/Waterly" target="_blank"><i class="bi bi-github fa-6x text-white m-3" style="font-size:40px;"></i></a>
+          <a href="https://github.com/Interlake-Congressional-App-Challenge/Commuter" target="_blank"><i class="bi bi-github fa-6x text-white m-3" style="font-size:40px;"></i></a>
           
         </h1>
       </div>

@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>Waterly - Resources</title>
+    <title>Commuter - Resources</title>
 </svelte:head>
 
 <h1>Resources</h1>

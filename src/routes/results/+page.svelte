@@ -12,7 +12,7 @@
 </script>
 
 <svelte:head>
-  <title>Waterly - Results</title>
+  <title>Commuter - Results</title>
 </svelte:head>
 
 <h1>Your Results</h1>

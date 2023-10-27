@@ -5,7 +5,7 @@
 <div class="about-section">
   <h1>About Us</h1>
   <p>
-    Waterly is a water calculator that asks questions to determine a person's
+    Commuter is a water calculator that asks questions to determine a person's
     water use in gallons per year and also estimates your bill based on your
     residence. Based on your responses to the questions, our website sends you
     personalized tips and suggests the following steps to help you create a more

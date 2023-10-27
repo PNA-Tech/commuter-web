@@ -49,7 +49,7 @@
 </script>
 
 <svelte:head>
-  <title>Waterly</title>
+  <title>Commuter</title>
 </svelte:head>
 
 <Estimate></Estimate>
