@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import type { HouseholdType, questions, QuestionType, MultipleChoiceQuestion, NumberQuestion, Tip } from "./questions";
+import { HouseholdType, questions, QuestionType, type MultipleChoiceQuestion, type NumberQuestion, type Tip } from "./questions";
 
 let $values: any[] = [];
 for (let q of questions) {
@@ -7,42 +7,17 @@ for (let q of questions) {
     case QuestionType.MultipleChoice:
       $values.push(Object.values((q.data as MultipleChoiceQuestion<any>).choices)[0]);
       break;
-
+  
     case QuestionType.Number:
       $values.push((q.data as NumberQuestion).default);
       break;
   }
-
 }
 
 export let values = writable($values);
-values.subscribe(v => { $values = v });
+values.subscribe(v => {$values = v});
 
 export let tips: Tip[] = [];
-
-// Generate random tips (excluding water-related products)
-const randomTips = [
-  {
-    title: "Reduce, Reuse, Recycle",
-    description: "Recycling is an effective way to reduce your carbon footprint. Sort your waste and recycle as much as possible to conserve resources and reduce CO2 emissions.",
-    save: Math.random() * 100,
-  },
-  {
-    title: "Unplug Unused Devices",
-    description: "Many devices consume energy even when turned off. Unplug chargers, appliances, and electronics when not in use to save energy and money.",
-    save: Math.random() * 50,
-  },
-  {
-    title: "Carpool or Use Public Transportation",
-    description: "Reduce your carbon footprint by carpooling with others or using public transportation. It's an eco-friendly way to commute.",
-    save: Math.random() * 70,
-  },
-];
-
-// Function to generate random tips (excluding water-related products)
-function generateRandomTips() {
-  tips = randomTips;
-}
 
 function bathrooms(): number {
   let res = 0;
@@ -68,8 +43,13 @@ function bathrooms(): number {
   }
 
   res += mult * $values[2] * $values[1];
-
-  // Skip water-related tips for showers
+  if ($values[0] != HouseholdType.Efficient) {
+    tips.push({
+      title: "Low-flow Showerhead",
+      description: "Try to use a showerhead which releases less water. This can help you save money and the planet by reducing CO2 emissions!",
+      save: (mult - 10) * $values[2] * $values[1]
+    });
+  }
 
   // Baths
   if (isNaN($values[3]) || isNaN($values[1])) {
@@ -97,8 +77,13 @@ function bathrooms(): number {
       return 0;
   }
   res += $values[4] * mult * $values[1];
-
-  // Skip water-related tips for sinks
+  if ($values[0] != HouseholdType.Efficient) {
+    tips.push({
+      title: "Low-flow Bathroom Faucet",
+      description: "Use a faucet with low-flow. This allows you to save money and help the Earth by reducing CO2 emissions!",
+      save: $values[4] * (mult - 10) * $values[1]
+    });
+  }
 
   // Toilets
   switch ($values[0]) {
@@ -119,9 +104,13 @@ function bathrooms(): number {
       return 0;
   }
   res += 10 * mult * $values[1]; // Realistic CO2 emission factor for toilet usage (in kilograms of CO2 per year)
-
-  // Skip water-related tips for toilets
-
+  if ($values[0] != HouseholdType.Efficient) {
+    tips.push({
+      title: "WaterSense Toilet",
+      description: "Save the environment as well as your bank account with a WaterSense Toilet and reduce CO2 emissions!",
+      save: 10 * (mult - 20) * $values[1]
+    });
+  }
   return res;
 }
 
@@ -136,8 +125,13 @@ function household(): number {
     mult = 20; // Realistic CO2 emission factor for other kitchen sinks
   }
   res += $values[5] * mult * $values[1];
-
-  // Skip water-related tips for kitchen sinks
+  if ($values[0] != HouseholdType.Efficient) {
+    tips.push({
+      title: "Low-flow Kitchen Faucet",
+      description: "Use a kitchen faucet with low-flow. This allows you to save money and help the Earth by reducing CO2 emissions!",
+      save: $values[5] * (mult - 10) * $values[1]
+    });
+  }
 
   // Dishes
   if (isNaN($values[6]) || isNaN($values[8])) {
@@ -153,8 +147,13 @@ function household(): number {
     mult = 30; // Realistic CO2 emission factor for dishwashing with EnergyStar dishwasher
   }
   res += $values[6] * mult;
-
-  // Skip water-related tips for dishwashing
+  if ($values[6] > 0 && $values[0] != HouseholdType.Efficient) {
+    tips.push({
+      title: "Use EnergyStar Dishwasher",
+      description: "Use an EnergyStar Dishwasher to clean your dishes while helping the environment and reducing CO2 emissions!",
+      save: $values[6] * (mult - 5) // Adjusted for more realistic savings
+    });
+  }
 
   // Laundry
   if ($values[0] === HouseholdType.Efficient) {
@@ -163,9 +162,13 @@ function household(): number {
     mult = 80; // Realistic CO2 emission factor for other laundry
   }
   res += $values[8] * mult;
-
-  // Skip water-related tips for laundry
-
+  if ($values[8] > 0 && $values[0] != HouseholdType.Efficient) {
+    tips.push({
+      title: "WaterSense Washing Machine",
+      description: "Use a WaterSense Washing Machine to clean your clothes while helping the environment and reducing CO2 emissions!",
+      save: $values[8] * (mult - 50) // Adjusted for more realistic savings
+    });
+  }
   return res;
 }
 
@@ -201,8 +204,6 @@ function outdoor(): number {
 export function calculate(): number {
   tips = [];
   let res = 0;
-
-  generateRandomTips(); // Generate random tips
 
   res += bathrooms();
   res += household();
