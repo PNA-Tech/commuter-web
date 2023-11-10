@@ -30,8 +30,8 @@
 </script>
 
 <div class="estimate">
-  <div>{display.toLocaleString()} kg CO2/year</div>
-  <div>{currencyFormat.format(cost(display))}/year</div>
+  <div>{(display/30).toLocaleString()} kg CO2/year</div>
+  <div>{currencyFormat.format(cost(display)/20)}/year</div>
 </div>
 
 <style>
